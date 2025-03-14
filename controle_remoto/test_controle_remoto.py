@@ -17,7 +17,7 @@ def test_mudar_canal_invalido():
 #teste para API
 @pytest.fixture
 def client():
-    app.config["TEFSTING"]=True
+    app.config["TESTING"]=True
     with app.test_client() as client:
         yield client
     
