@@ -1,7 +1,6 @@
 from flask import Flask,jsonify,request
 
 app = Flask(__name__)
-
 class ControleRemoto:
     def __init__(self):
         self.canal = 1
@@ -28,7 +27,6 @@ def alterar_canal():
     if(resposta[1] == 400):
         return jsonify(resposta[0]), resposta[1]
     return jsonify(resposta[0]), resposta[1]
-
 
 if __name__ == "__main__":
     app.run(debug=True)

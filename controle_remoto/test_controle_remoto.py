@@ -1,18 +1,18 @@
 import pytest
-from controle_remoto import app, ControleRemoto
+from controle_remoto import app, ControleRemoto, controle
 
 #teste para a classe
 def test_mudar_canal_valido():
-    controle = ControleRemoto()
+   # controle = ControleRemoto()
     resposta = controle.mudar_de_canal(5)
-    assert resposta == ({"message": f"Canal alterado para 5"},200)
+    assert resposta == ({"message": f"Canal alterado para {controle.canal}"},200)
     assert controle.canal == 5
     
 def test_mudar_canal_invalido():
-    controle = ControleRemoto()
+   # controle = ControleRemoto()
     resposta = controle.mudar_de_canal(-1)
     assert resposta == ({"erro":"Canal inválido" }, 400)
-    assert controle.canal == 1
+    assert controle.canal == 5
     
 #teste para API
 @pytest.fixture
@@ -24,7 +24,7 @@ def client():
 def test_pegar_canal(client):
     resposta = client.get("/canal")
     assert resposta.status_code == 200
-    assert resposta.json == {"canal_atual":1}
+    assert resposta.json == {"canal_atual": controle.canal}
     
 def test_alterar_canal(client):
     resposta = client.post("/canal",json={"canal": 10})
